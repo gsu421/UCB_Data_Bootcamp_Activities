@@ -1,0 +1,48 @@
+Sub WellsFargo()
+
+Dim LastRow As Integer
+Dim DataSheet As String
+Dim header() As String
+Dim WS_Count As Integer
+
+WS_Count = ActiveWorkbook.Worksheets.Count
+Debug.Print WS_Count
+
+For n = 1 To WS_Count
+    DataSheet = ActiveSheet.Name
+    LastRow = Cells(Rows.Count, 2).End(xlUp).Row
+
+
+
+    Debug.Print LastRow
+
+    'Insert 1 column
+    Columns("A:A").Insert
+
+    'Get Sheetname
+    Position = InStr(DataSheet, "_")
+    DataSheet = Left(DataSheet, Position - 1)
+
+    Range("A1").Value = "State"
+    Range("A2:A" & LastRow).Value = DataSheet
+
+    'Debug.Print DataSheet
+
+
+
+    'Rename Header
+
+    For j = 3 To 7
+    ' Position = InStr(Cells(1, j).Value, " ")
+     header() = Split(Cells(1, j).Value, " ")
+    Cells(1, j).Value = header(3)
+    Next j
+
+    'Convert cell value to currencies
+    Range("C2:G" & LastRow).NumberFormat = "$#,##0"
+
+Next n
+
+    
+
+End Sub
