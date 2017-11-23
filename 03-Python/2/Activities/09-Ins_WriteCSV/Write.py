@@ -12,3 +12,7 @@ with open(output_path, 'w', newline='') as csvfile:
     
     # Write the second row
     csvwriter.writerow(['Caleb', 'Frost', '505-80-2901'])
+
+    #
+    for x in range(5):
+        csvwriter.writerow([x])
